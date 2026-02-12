@@ -1,4 +1,4 @@
-# TicketingSystem
+# Dependency Aware Ticketing System
 
 Fullstack TODO app with React + TypeScript frontend and Node.js + Express + TypeScript backend. Includes JWT auth, recurring tasks, dependencies, and a MySQL database with local file uploads for profile photos.
 
@@ -30,3 +30,8 @@ Backend: http://localhost:4000
 
 ## Profile Photo Storage
 Profile photos are stored locally under `uploads/` and served by the backend.
+
+
+# Contacts:
+Linkedin: https://www.linkedin.com/in/babak-solhjoo-533938a2/
+Webpage: https://babak-solhjoo.com/ 
