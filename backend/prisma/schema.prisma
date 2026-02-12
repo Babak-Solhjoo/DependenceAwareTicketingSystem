@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+enum TaskStatus {
+  NOT_DONE
+  DONE
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum Recurrence {
+  DAILY
+  WEEKLY
+  MONTHLY
+}
+
+model User {
+  id           String  @id @default(cuid())
+  email        String  @unique
+  passwordHash String
+  firstName    String?
+  lastName     String?
+  photo        String? @db.LongText
+  createdAt    DateTime @default(now())
+  tasks        Task[]
+}
+
+model Task {
+  id               String   @id @default(cuid())
+  title            String
+  description      String?
+  status           TaskStatus @default(NOT_DONE)
+  priority         Priority @default(MEDIUM)
+  recurrence       Recurrence?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  lastRecurrenceAt DateTime?
+  userId           String
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  dependencies     TaskDependency[] @relation("TaskDependencies")
+  dependents       TaskDependency[] @relation("TaskDependents")
+}
+
+model TaskDependency {
+  id          String @id @default(cuid())
+  taskId      String
+  dependsOnId String
+  task        Task @relation("TaskDependencies", fields: [taskId], references: [id], onDelete: Cascade)
+  dependsOn   Task @relation("TaskDependents", fields: [dependsOnId], references: [id], onDelete: Cascade)
+
+  @@unique([taskId, dependsOnId])
+}
