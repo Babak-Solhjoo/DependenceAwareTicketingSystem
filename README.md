@@ -33,5 +33,5 @@ Profile photos are stored locally under `uploads/` and served by the backend.
 
 
 # Contacts:
-Linkedin: https://www.linkedin.com/in/babak-solhjoo-533938a2/
-Webpage: https://babak-solhjoo.com/ 
+- Linkedin: https://www.linkedin.com/in/babak-solhjoo-533938a2/
+- Webpage: https://babak-solhjoo.com/ 
